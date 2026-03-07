@@ -7,3 +7,5 @@ _main:
 # this command doesn't work but if you run the actual command it does work
 build:
     zc build --verbose -o demo2 -I./include -L./lib -lraylib -lm -ldl -lpthread --emit-c demo2.zc
+nice:
+    zc build --verbose -o nice -I./include -L./lib -lraylib -lm -ldl -lpthread --emit-c nice.zc
