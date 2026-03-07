@@ -1,0 +1,13 @@
+include "raylib.h";
+
+fn main() {
+   InitWindow(800, 600, "Zen C");
+   SetTargetFPS(60);
+
+   while (!WindowShouldClose()) {
+     BeginDrawing();
+     ClearBackground(SKYBLUE);
+     DrawText("hello", 200,200,90,LIGHTGRAY);	
+     EndDrawing();
+   }	
+}
