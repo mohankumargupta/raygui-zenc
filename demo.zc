@@ -1,0 +1,51 @@
+import "std/mem.zc"
+include "raylib.h";
+
+struct Button {
+	texture: Texture2D,
+	position: Vector2
+}
+
+impl Button {
+	fn new(imagePath: string, imagePosition: Vector2, scale: float) -> Self {
+        let image = LoadImage(imagePath);
+        let width = image.width;
+        let height = image.height;
+        let newwidth = width * scale;
+        let newheight = height * scale;
+        ImageResize(&image, newwidth, newheight);
+        let texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+		return Button {texture: texture, position: imagePosition};
+	}
+
+    fn draw(self) {
+    	DrawTextureV(self.texture, self.position, WHITE);
+    }
+}
+
+impl Drop for Button {
+	fn drop(self) {
+		UnloadTexture(self.texture)
+	}
+}
+
+fn main() {
+   InitWindow(800, 600, "Zen C");
+   SetTargetFPS(60);
+   let exit = false;
+   let background = LoadTexture("background.png");
+   let start_button = Button("start_button.png", Vector2(300,150), 0.65);
+   let exit_button = Button("exit_button.png", Vector2(300,300), 0.65);
+   
+
+
+   while (!WindowShouldClose() && !exit) {
+     BeginDrawing();
+     defer EndDrawing();
+     ClearBackground(BLACK);
+     DrawTexture(background, 0, 0, WHITE);
+     start_button.draw();
+     exit_button.draw();
+   }	
+}
