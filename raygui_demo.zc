@@ -1,0 +1,32 @@
+include "raylib.h";
+include "raygui_impl.h";
+
+
+fn main() {
+   InitWindow(800, 600, "Raylib GUI demo");
+   SetTargetFPS(60);
+
+   let exit = false;
+   let showMessage = false;
+
+   while (!WindowShouldClose() && !exit) {
+  
+     BeginDrawing();
+     defer EndDrawing();
+     ClearBackground(RAYWHITE);
+
+    if (IsKeyPressed(KEY_Q)) {
+         exit = true;
+     }
+
+
+     if (GuiButton(Rectangle{ x:24, y:24, width:120, height:30 }, "#191#Show Message")) {
+       showMessage = !showMessage;
+     }
+
+     if (showMessage) {
+         DrawText("Hello! The button works!", 200, 200, 20, DARKGRAY);
+     }     
+
+   }	
+}
